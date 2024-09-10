@@ -6,11 +6,12 @@ app = FastAPI()
 
 # Conexión a la base de datos PostgreSQL
 conn = psycopg2.connect(
-    dbname="tu_db",
-    user="tu_usuario",
-    password="tu_password",
+    dbname="chatbot_db",
+    user="LuisJDomingo",
+    password="Genio2712",
     host="localhost"
 )
+
 cursor = conn.cursor()
 
 # Modelo para recibir datos de preguntas
