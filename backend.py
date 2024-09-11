@@ -2,15 +2,20 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import psycopg2
 
+
+print(dir(psycopg2))
+
 app = FastAPI()
 
 # Conexión a la base de datos PostgreSQL
 conn = psycopg2.connect(
     dbname="chatbot_db",
-    user="LuisJDomingo",
-    password="Genio2712",
-    host="localhost"
+    user="postgres",
+    password="tu_contraseña",
+    host="localhost",
+    port="5432"
 )
+
 
 cursor = conn.cursor()
 
@@ -27,3 +32,7 @@ def ask_question(question: Question):
         response = "No tengo una respuesta para esa pregunta."
     
     return {"response": response}
+
+# No olvides cerrar el cursor y la conexión cuando termines
+cursor.close()
+conn.close()
