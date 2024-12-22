@@ -49,9 +49,8 @@ Contacto y Soporte
 
 Para consultas o problemas, contacta al equipo de soporte:
 
-Correo: soporte@chatbotasistente.com
-
-Teléfono: +34 123 456 789
+Correo: ############
+Teléfono: ###########
 
 Horario: Lunes a Viernes, de 9:00 a.m. a 6:00 p.m. (CET)
 
