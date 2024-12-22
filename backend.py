@@ -6,7 +6,11 @@ from sqlalchemy.orm import sessionmaker
 app = FastAPI()
 
 # Parámetros de conexión
-DATABASE_URL = "postgresql://postgres:Genio2712@localhost:5432/chatbot_db"
+'''base de dato documental:
+    MongoDb
+    archivos de claves
+'''
+DATABASE_URL = ""
 
 # Crear el motor de conexión
 engine = create_engine(DATABASE_URL)
