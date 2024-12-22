@@ -1,0 +1,69 @@
+## Guía de Uso
+
+**Registro e Inicio de Sesión**
+
+El usuario debe registrarse proporcionando un correo electrónico válido.
+
+Se enviará un código de verificación para confirmar la identidad.
+
+Después de la verificación, el usuario puede iniciar sesión.
+
+Creación de Tareas
+
+Comando: "Crear tarea".
+
+Ejemplo: "Crear tarea para comprar leche mañana a las 10:00 a.m."
+
+Confirmación: El chatbot confirmará con detalles.
+
+Edición: El usuario puede modificar la tarea con el comando "Editar tarea".
+
+Configuración de Recordatorios
+
+Comando: "Configurar recordatorio".
+
+Ejemplo: "Recuérdame llamar a Juan el viernes a las 5:00 p.m."
+
+El recordatorio aparecerá en la interfaz principal y, si está integrado, en el calendario del usuario.
+
+Consultas Generales
+
+Ejemplo: "¿Cuál es el clima de hoy?" o "¿Qué eventos tengo esta semana?"
+
+Integración con Servicios Externos
+
+Ir a Configuración > Integraciones.
+
+Seleccionar el servicio deseado e iniciar sesión.
+
+Autorizar permisos para acceder a los datos necesarios.
+
+Tecnologías Utilizadas
+
+Frontend: React.js, Bootstrap.
+
+Backend: Python.
+
+Procesamiento de Lenguaje Natural: OpenAI API o Google Dialogflow.
+
+Base de Datos: MongoDB.
+
+Autenticación: OAuth 2.0, JWT.
+
+Infraestructura: Docker, Kubernetes, y AWS para despliegue.
+
+Seguridad y Privacidad
+
+Los datos del usuario están cifrados tanto en tránsito como en reposo.
+
+Los permisos de acceso están configurados para limitar el uso a funcionalidades estrictamente necesarias.
+
+Cumplimiento con GDPR (Reglamento General de Protección de Datos) para usuarios europeos.
+
+Futuras Ampliaciones
+
+Soporte para múltiples idiomas.
+
+Integración con dispositivos IoT para automatización del hogar.
+
+Análisis de datos para proporcionar informes personalizados sobre las actividades del usuario.
