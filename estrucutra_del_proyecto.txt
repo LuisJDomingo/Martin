@@ -1,0 +1,36 @@
+ProyectMartin/
+├── manage.py                     # Script principal para administrar el proyecto.
+├── ProyectMartin/
+│   ├── __init__.py
+│   ├── asgi.py                   # Configuración para el servidor ASGI.
+│   ├── settings.py               # Configuración del proyecto Django.
+│   ├── urls.py                   # Configuración de rutas globales del proyecto.
+│   ├── wsgi.py                   # Configuración para el servidor WSGI.
+│   └── __pycache__/
+├── chatbot/
+│   ├── migrations/               # Archivos de migración de base de datos.
+│   │   ├── __init__.py
+│   ├── templates/
+│   │   └── chatbot/
+│   │       └── chat.html         # Interfaz del chatbot.
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── styles.css        # Estilos para la interfaz.
+│   │   ├── js/
+│   │   │   └── chatbot.js        # Lógica de frontend para el chatbot.
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── predictClass.py       # Función para predecir la intención del mensaje.
+│   │   ├── getResponse.py        # Función para obtener la respuesta según la intención.
+│   │   ├── chatbot_model.h5      # Modelo entrenado del chatbot.
+│   │   └── intents.json          # Archivo de configuración de intenciones.
+│   ├── __init__.py
+│   ├── admin.py                  # Configuración del panel de administración.
+│   ├── apps.py                   # Configuración de la aplicación.
+│   ├── models.py                 # Modelos de base de datos (si se usan).
+│   ├── tests.py                  # Pruebas automatizadas.
+│   ├── urls.py                   # Rutas específicas para la aplicación `chatbot`.
+│   ├── views.py                  # Lógica del backend (vistas para las rutas).
+│   └── __pycache__/
+├── db.sqlite3                    # Base de datos SQLite creada automáticamente.
+└── venv/                         # Entorno virtual (si usas uno).

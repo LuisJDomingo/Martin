@@ -13,9 +13,14 @@ from numpy.f2py.crackfortran import word_pattern
 
 lemmatizer = WordNetLemmatizer()
 
-# carga de archivo .json
-intents = json.loads(open('intents.json').read())
+import os
+print("Directorio actual:", os.getcwd())
 
+# carga de archivo .json
+try:
+    intents = json.loads(open(r'D:\RESPALDO_ESCRITORIO\Portfolio\Martin\Martin\intents.json').read())
+except:
+    print("no esta el archivo intents.json")
 #descarga de archivos necesarios
 nltk.download('punkt')
 nltk.download('wordnet')
@@ -39,8 +44,19 @@ for intent in intents['intents']:
 words = [lemmatizer.lemmatize(word) for word in words if word not in ignore_letters]
 words = sorted(set(words))
 
-pickle.dump(words, open('words.pkl', 'wb'))
-pickle.dump(classes, open('classes.pkl', 'wb'))
+# Ruta de los archivos JSON
+words_path = 'words.json'
+classes_path = 'classes.json'
+
+# Guardar 'words' en un archivo JSON
+with open(words_path, 'w') as file:
+    json.dump(words, file)
+print(f"Words guardado en {words_path}")
+
+# Guardar 'classes' en un archivo JSON
+with open(classes_path, 'w') as file:
+    json.dump(classes, file)
+print(f"Classes guardado en {classes_path}")
 
 training = []
 output_empty = [0]*len(classes)
@@ -75,8 +91,9 @@ sgd = SGD(learning_rate=0.001, decay=1e-6, momentum=0.9, nesterov=True)
 #compilamos el modelo
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-train_process = model.fit(np.array(train_x), np.array(train_y), epochs=150, batch_size=5, verbose = True)
+train_process = model.fit(np.array(train_x), np.array(train_y), epochs=150, batch_size=5, verbose = False)
 model.save('chatbot_model.h5')
+
 
 
 
