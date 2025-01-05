@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interactivo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .chat-body {
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+        }
+        .chat-bubble {
+            max-width: 70%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .chat-bubble.user {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+        }
+        .chat-bubble.bot {
+            background: #e9ecef;
+            color: #212529;
+            margin-right: auto;
+        }
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+        .chat-footer input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .chat-footer button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .chat-footer button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h3>mARTIN</h3>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje...">
+            <button id="sendButton">Enviar</button>
+        </div>
+    </div>
+    <script>
+        const chatBody = document.getElementById('chatBody');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+    
+        const appendMessage = (message, sender) => {
+            const bubble = document.createElement('div');
+            bubble.classList.add('chat-bubble', sender);
+            bubble.textContent = message;
+            chatBody.appendChild(bubble);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        };
+    
+        const sendMessage = async () => {
+            const message = userInput.value.trim();
+            if (message) {
+                appendMessage(message, 'user');
+                userInput.value = '';
+    
+                // Send the message to the server
+                const response = await fetch('/chatbot/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ message })
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    appendMessage(data.response, 'bot');
+                } else {
+                    appendMessage('Error al comunicarse con el servidor.', 'bot');
+                }
+            }
+        };
+    
+        // Event listener for the send button
+        sendButton.addEventListener('click', sendMessage);
+    
+        // Event listener for the Enter key
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default form submission
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

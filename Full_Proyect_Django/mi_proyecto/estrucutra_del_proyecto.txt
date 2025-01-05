@@ -15,9 +15,9 @@ ProyectMartin/
 │   │       └── chat.html         # Interfaz del chatbot.
 │   ├── static/
 │   │   ├── css/
-│   │   │   └── styles.css        # Estilos para la interfaz.
+│   │   │   └──                   # Estilos para la interfaz.
 │   │   ├── js/
-│   │   │   └── chatbot.js        # Lógica de frontend para el chatbot.
+│   │   │   └──         # Lógica de frontend para el chatbot.
 │   ├── utils/
 │   │   ├── __init__.py
 │   │   ├── predictClass.py       # Función para predecir la intención del mensaje.

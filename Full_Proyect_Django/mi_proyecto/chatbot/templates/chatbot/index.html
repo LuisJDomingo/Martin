@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!-- Esto es importante para que Django pueda manejar correctamente el CSRF -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    {% csrf_token %}
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <form id="chat-form">
+        <input type="text" id="message" placeholder="Escribe tu mensaje">
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        // Función para obtener el valor del token CSRF desde las cookies
+        function getCsrfToken() {
+            const cookieValue = document.cookie
+                .split(';')
+                .find(cookie => cookie.trim().startsWith('csrftoken='))
+                ?.split('=')[1];
+
+            return cookieValue || '';
+        }
+
+        // Añadir el manejador del formulario
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const message = document.getElementById('message').value;
+            const csrfToken = getCsrfToken();  // Obtener el token CSRF
+
+            fetch('/chatbot/api/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,  // Agregar el token CSRF a las cabeceras
+                },
+                body: JSON.stringify({ message }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').innerText = data.response || data.error;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
