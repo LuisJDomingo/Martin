@@ -6,6 +6,8 @@ import nltk
 from sklearn.preprocessing import LabelEncoder
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
+from gtts import gTTS
+import pygame
 
 # Inicializar el lematizador
 lemmatizer = WordNetLemmatizer()
@@ -63,13 +65,35 @@ def predictClass(sentence):
 def getResponse(intents_list, intents_json):
     print('empieza la get response')
     if not intents_list:
-        return "Lo siento, no puedo identificar ninguna intención."
-
+        respuesta = "Lo siento, no puedo identificar ninguna intención."
+        martin_says(respuesta)
+        return respuesta
     intent_name = intents_list[0]['intent']
     if 'intents' not in intents_json:
-        return "Lo siento, la estructura de datos no es válida."
+        respuesta = "Lo siento, la estructura de datos no es válida."
+        martin_says(respuesta)
+        return respuesta
 
     for intent in intents_json['intents']:
         if intent['intent'] == intent_name:
-            return random.choice(intent['responses'])
-    return "Lo siento, no entiendo lo que dices."
+            respuesta = random.choice(intent['responses'])
+            martin_says(respuesta)
+            return respuesta
+    respuesta = "Lo siento, no entiendo lo que has dicho."
+    martin_says(respuesta)
+    return respuesta
+
+def martin_says(texto, nombre_archivo="respuesta.mp3"):
+    tts = gTTS(text=texto, lang='es')
+    tts.save(nombre_archivo)
+    
+    # Inicializar pygame mixer
+    pygame.mixer.init()
+    
+    # Cargar y reproducir el archivo de audio
+    pygame.mixer.music.load(nombre_archivo)
+    pygame.mixer.music.play()
+    
+    # Esperar a que termine la reproducción
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
